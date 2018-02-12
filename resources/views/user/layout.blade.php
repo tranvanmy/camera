@@ -1,33 +1,37 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title> @yield('userTitle') </title>
-
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta http-equiv="content-language" content="vi">
+    <title> @yield('userTitle') </title>
     <meta name="description" content="@yield('seoDescription')">
     <meta name="keywords" content="@yield('seoKeyword')">
-    <meta name="language" content="vietnamese">
-    <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
-    <link rel="stylesheet" href="/css/user.css" type="text/css">
-    
-    @yield('addCss')
+    <meta content="DOCUMENT" name="RESOURCE-TYPE">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link href="/css/user/screen.css" type="text/css" rel="stylesheet">
 
+    @yield('addCss')
 </head>
 
 <body>
-    <div id="container" style="margin-top:25px">
+    <div class="bdw">
 
         @include('user.library.header')
 
-        @include('user.library.category')
+        <!--list-hotline-header-->
+        <div class="mc">
+            <ul class="ul mc">
+                @include('user.library.sidebar')
 
-        @yield('content')
+                @yield('content')
+            </ul>
 
-        <div class="clear"></div>
+            <div class="clear10px"></div>
+            
+            @include('user.library.menu-footer')
+
+        </div>
 
         @include('user.library.footer')
 

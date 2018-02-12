@@ -5,79 +5,80 @@
     }
 @endphp
 
-<div id="header">
-    <div id="logo">
-        <a title="" href="/">
+<div class="hdr">
+    <div class="hdr_top" style="position:relative;">
+        <a title="Trang chủ" class="logo" href="/">
             @if ($options && $options['logo'])
-                <img src="{{ Croppa::url('/' . $options['logo'], null, 76, array('resize')) }}" alt="Camera289">
+                <img src="{{ Croppa::url('/' . $options['logo'], null, 76, array('resize')) }}" alt="Camera289" border="0" class="png">
             @else
-                <img src="/images/icons/logo.png" alt="Camera289">
+                <img src="/images/icons/logo.png" alt="Camera289" border="0" class="png">
             @endif
         </a>
-    </div>
-    <div class="searchfield">
-        <form action="{{ route('user.search') }}" method="get" id="skypeSearchForm">
-            <div class="typesearch">
-                <input class="typeKey" title="Tìm kiếm" type="text" name="key"
-                    maxlength="60" placeholder="Nhập tên sản phẩm hoặc từ khóa tìm kiếm..."
-                >
-            </div>
-            <input type="submit" value="" class="btnSearch">
-        </form>
-    </div>
-    <div class="content_right" style="padding-right:25px;position: relative">
-        <div style="width: 200px; float:left; padding-top:10px">
-            <em style="font-size: 14px; color: rgb(0, 0, 0);">
-                <strong style="color: red;">
-                    TRUNG THỰC
-                </strong>
-            </em><br/>
-            <em style="font-size: 14px; color: rgb(0, 0, 0);">
-                <strong style="color: red;">
-                    CHUYÊN NGHIỆP                        
-                </strong>
-            </em><br/>
-            <em style="font-size: 14px; color: rgb(0, 0, 0);">
-                <strong style="color: red;">
-                    TẬN TÂM
-                </strong>
-            </em>
-        </div>
-        <div style="width: 340px; text-align: right; float:left; font-size:14px; padding-top:10px">
+        <div id="support-header-right">
+            <span style="font-size: large; color: #333399;" data-mce-mark="1">
                 <strong>Địa chỉ : </strong>
                 Số 5, ngõ 289 Hoàng Mai, Hà Nội
-                <br/>
-                <strong>Điện thoại : </strong>
-                0943.044.115 - 0975.801.420
+            </span>
+            <br/>
+            <span style="font-size: large; color: #ff0000;" data-mce-mark="1">
+                <strong>Điện thoại : 0972.030.468 - 0968.930.743</strong>
+            </span>
         </div>
+        <div style="clear:both"></div>
     </div>
-    <div id="header_nav">
-        <div class="fl" style="float:right; margin-right: 10px" id="navid">
-            @foreach($userMenu['right'] as $menu)
-                <div style="margin-top: {{ $menu->icon ? '-22px;' : '3px' }};  float: left; margin-right: 9px;">
-                    <a title="{{ $menu->name }}" href="{{ $menu->path }}">
-                        {{ $menu->name }}
-                        @if ($menu->icon)
-                            <img alt="" src="{{ Croppa::url('/' . $menu->icon, null, 37, array('resize')) }}" style="height:37px">
-                        @endif
-                        <img alt="" src="/uploads/khuyen-mai.png" style="height:37px">
-                    </a>
+    <div class="navbar">
+        <ul class="ul nav">
+            <li>
+                <div class="c">
+                    <a title="Trang chủ" href="/">Trang chủ</a>
                 </div>
-            @endforeach
-        </div>
-        <div class="fl" id="navid">
+            </li>
             @foreach($userMenu['left'] as $menu)
-                <div style="margin-top: {{ $menu->icon ? '-22px;' : '3px' }}; float: left; margin-right: 9px;">
+            <li>
+                <div class="c">
                     <a title="{{ $menu->name }}" href="{{ $menu->path }}">
                         {{ $menu->name }}
-                        @if ($menu->icon)
-                            <img alt="" src="{{ Croppa::url('/' . $menu->icon, null, 37, array('resize')) }}" style="height:37px">
-                        @endif
-                        <img alt="" src="/uploads/khuyen-mai.png" style="height:37px">
                     </a>
                 </div>
+            </li>
             @endforeach
+
+            @foreach($userMenu['right'] as $menu)
+            <li>
+                <div class="c">
+                    <a title="{{ $menu->name }}" href="{{ $menu->path }}">
+                        {{ $menu->name }}
+                    </a>
+                </div>
+            </li>
+            @endforeach
+        </ul>
+        <form method="get" action="/search" class="search">
+            <ul class="ul png search">
+                <li class="ip">
+                    <input type="text" class="cssInput" name="key" placeholder="Từ khóa cần tìm kiếm...">
+                    <input type="submit" class="cssSubmit" id="search" value="" style="height: 22px">
+                </li>
+            </ul>
+        </form>
+        <div style="clear:both"></div>
+    </div>
+</div>
+<div style="clear:both"></div>
+
+@if ($userBanners['partner']->count())
+    <div id="list-hotline-header">
+        <div style="color: rgb(84, 84, 84);font-size: 18px;word-spacing: -1px;text-indent: 20px;font-weight: normal;margin-top: 10px ">
+            <span style="color:rgb(0, 0, 205);">Khách hàng - Đối tác chính</span>
+        </div>
+        <div style="height:80px; width: 970px; margin: 0 auto; overflow: hidden;">
+            <div style="height:80px; width: 970px; margin: 0 auto;animation: notify_textmove 25s linear infinite;-webkit-animation: notify_textmove 25s linear infinite;">
+                @foreach($userBanners['partner'] as $partner)
+                    <a href="{{ $partner->link }}">
+                        <img alt="{{ $partner->name }}" height="60" src="/{{ $partner->image }}" width="120">
+                    </a>
+                @endforeach
+            </div>
         </div>
     </div>
-    <div style="clear:both"></div>
-</div>
+@endif

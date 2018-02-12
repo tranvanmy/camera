@@ -21,50 +21,44 @@
             </b-button-group>
         </b-col>
         <b-col lg="12">
-            <b-tabs pills card>
-                <b-tab
-                    :title="$t(option.text)"
-                    v-for="option in optionPosition"
-                    :key="option.value"
+            <b-card>
+                <b-table
+                    class="mb-0 table-outline text-center"                    
+                    head-variant="light"
+                    :hover="true" :striped="false"
+                    :bordered="true" :fixed="true" 
+                    :items="items"
+                    :fields="fields"
+                    :current-page="currentPage"
+                    :per-page="perPage"
                 >
-                    <b-table
-                        class="mb-0 table-outline text-center"                    
-                        head-variant="light"
-                        :hover="true" :striped="false"
-                        :bordered="true" :fixed="true" 
-                        :items="getItemFilter(option.value)"
-                        :fields="fields"
-                        :current-page="currentPage"
-                        :per-page="perPage"
-                    >
-                        <template slot="name" slot-scope="data">
-                            <img :src="`/${data.item.icon}`" v-if="data.item.icon" style="height: 37px">
-                            {{ data.item.name }}
-                        </template>
-                        <template slot="position" slot-scope="data">
-                            {{ getTextPosition(data) }}
-                        </template>
-                        <template slot="action" slot-scope="data">
-                            <b-button
-                                type="submit" size="sm"
-                                variant="primary"
-                                @click="clickEditMenu(data.item)"
-                            >
-                                <i class="icon-pencil"></i>
-                                {{ $t('textEdit') }}
-                            </b-button>
-                            <b-button
-                                type="reset" size="sm"
-                                variant="danger"
-                                @click="clickDeleteMenu(data.item.id)"
-                            >
-                                <i class="icon-trash"></i>
-                                {{ $t('textDelete') }}
-                            </b-button>
-                        </template>
-                    </b-table>
-                </b-tab>
-            </b-tabs>
+                    <template slot="name" slot-scope="data">
+                        <img :src="`/${data.item.icon}`" v-if="data.item.icon" style="height: 37px">
+                        {{ data.item.name }}
+                    </template>
+                    <template slot="position" slot-scope="data">
+                        {{ getTextPosition(data) }}
+                    </template>
+                    <template slot="action" slot-scope="data">
+                        <b-button
+                            type="submit" size="sm"
+                            variant="primary"
+                            @click="clickEditMenu(data.item)"
+                        >
+                            <i class="icon-pencil"></i>
+                            {{ $t('textEdit') }}
+                        </b-button>
+                        <b-button
+                            type="reset" size="sm"
+                            variant="danger"
+                            @click="clickDeleteMenu(data.item.id)"
+                        >
+                            <i class="icon-trash"></i>
+                            {{ $t('textDelete') }}
+                        </b-button>
+                    </template>
+                </b-table>
+            </b-card>
         </b-col>
     </b-row>
 </template>
@@ -73,7 +67,6 @@
     import AdminMenuAdd from './AdminMenuAdd.vue'
     import AdminMenuEdit from './AdminMenuEdit.vue'
 
-    import { ADMIN_MENU_POSITION_OPTION } from '../../store/menus'
     import Helper from '../../library/Helper'
 
     export default {
@@ -95,31 +88,10 @@
                 ],
                 currentPage: 1,
                 perPage: this.totalRows,
-                optionPosition: ADMIN_MENU_POSITION_OPTION
             }
         },
 
         methods: {
-            getTextPosition(item) {
-                let index = _.findIndex(ADMIN_MENU_POSITION_OPTION, (option) => option.value === item.item.position)
-
-                return this.$i18n.t(ADMIN_MENU_POSITION_OPTION[index].text)
-            },
-
-            filterData(item) {
-                let result = {}
-                let fields = this.fields
-                for(let i = 0; i < fields.length; i++) {
-                    result[fields[i].key] = item[fields[i].key]
-                }
-
-                return result;
-            },
-
-            getItemFilter(position) {
-                return this.items.filter(item => item.position == position)
-            },
-
             clickAddNewMenu() {
                 let modalAdd = { ...this.modalAdd, open: true }
 
@@ -127,7 +99,7 @@
             },
 
             submitModalAdd(params) {
-                if (!params.name || !params.path || !params.position) {
+                if (!params.name || !params.path) {
                     return this.$toaster.error(this.$i18n.t('textNotFillEnough'))
                 }
 

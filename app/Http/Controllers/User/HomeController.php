@@ -22,7 +22,7 @@ class HomeController extends Controller
             ->where('status', Category::STATUS_SHOW)
             ->whereNull('parent_id')->orWhere('parent_id', 0)
             ->orderBy('prioty', 'desc')->orderBy('id')
-            ->take(5)->get();
+            ->get();
 
         foreach ($homeCategories as $key => $category) {
             $categoryIds = array_merge(
@@ -36,14 +36,7 @@ class HomeController extends Controller
                 ->take(8)->get();
         }
 
-        $banner['ad'] = Banner::where('status', Banner::STATUS_SHOW)
-            ->where('position', Banner::POSITION_AD)
-            ->orderBy('id', 'desc')->first();
-        $banner['partner'] = Banner::where('status', Banner::STATUS_SHOW)
-            ->where('position', Banner::POSITION_PARTNER)
-            ->get();
-
-        return view('user.index', compact(['homeCategories', 'banner']));
+        return view('user.index', compact(['homeCategories']));
     }
 
     public function categoryParent($parent)
@@ -85,7 +78,7 @@ class HomeController extends Controller
             $categories = Category::with('parentCategory')
                 ->with(['posts' => function($query){
                     $query->where('status', Post::STATUS_SHOW)
-                        ->orderBy('id', 'desc')->take(4);
+                        ->orderBy('id', 'desc')->take(6);
                 }])
                 ->where('status', Category::STATUS_SHOW)
                 ->whereIn('id', $categoryIds)
@@ -192,6 +185,9 @@ class HomeController extends Controller
         if(!$data['post']) {
             return redirect('/');
         }
+
+        $data['post']->total_views += 1;
+        $data['post']->save();
 
         $data['newer-news'] = Post::where('status', Post::STATUS_SHOW)
             ->where('created_at', '>', $data['post']->created_at)
