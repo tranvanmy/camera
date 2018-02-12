@@ -68,14 +68,18 @@
 
 @if ($userBanners['partner']->count())
     <div id="list-hotline-header">
-        <div style="color: rgb(84, 84, 84);font-size: 18px;word-spacing: -1px;text-indent: 20px;font-weight: normal;margin-top: 10px ">
-            <span style="color:rgb(0, 0, 205);">Khách hàng - Đối tác chính</span>
+        <div style="background: #f3f3f3; color: rgb(84, 84, 84);word-spacing: -1px;text-indent: 20px;font-weight: normal;padding: 10px 0px">
+            <span style="color:rgb(0, 0, 205);font-size: 18px">Khách hàng - Đối tác chính</span>
         </div>
-        <div style="height:80px; width: 970px; margin: 0 auto; overflow: hidden;">
-            <div style="height:80px; width: 970px; margin: 0 auto;animation: notify_textmove 25s linear infinite;-webkit-animation: notify_textmove 25s linear infinite;">
+        <div style="height: 70px; width: 970px; margin: 0 auto; overflow: hidden;">
+            <div 
+                style="height: 70px; width: 970px; 
+                    margin: 0 0;animation: notify_textmove 25s linear infinite;
+                    -webkit-animation: notify_textmove 25s linear infinite;"
+            >
                 @foreach($userBanners['partner'] as $partner)
                     <a href="{{ $partner->link }}">
-                        <img alt="{{ $partner->name }}" height="60" src="/{{ $partner->image }}">
+                        <img alt="{{ $partner->name }}" height="55" src="/{{ $partner->image }}">
                     </a>
                 @endforeach
             </div>
