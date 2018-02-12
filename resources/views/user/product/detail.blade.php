@@ -99,12 +99,12 @@
             }
         </script>
         <div style="color:#0000ff; padding-left: 0px" class="btitle">
-            <a href="#" class="active user-product-tab" data-target="user-product-detail"
+            <a href="javascript:void(0)" class="active user-product-tab" data-target="user-product-detail"
                 onclick="changeProductTab(this)"
             >
                 Chi tiết sản phẩm
             </a>
-            <a href="#" class="user-product-tab" data-target="user-product-guide"
+            <a href="javascript:void(0)" class="user-product-tab" data-target="user-product-guide"
                 onclick="changeProductTab(this)"
             >
                 Hướng dẫn sử dụng
