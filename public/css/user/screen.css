@@ -343,7 +343,7 @@ ul.catLs li.l a:visited, ul.catLs li.l a:link {
 }
 
 .m .bCt.productLs {
-	padding-top: 0;
+	padding-top: 0px;
 	float: left;
 	padding-right: 0px;
 }
