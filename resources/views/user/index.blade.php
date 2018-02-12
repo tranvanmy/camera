@@ -48,6 +48,7 @@
                     @endif
                 </div>
             </div>
+            <div class="clear10px"></div>
         @endforeach
     </li>
 @endsection
