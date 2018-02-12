@@ -30,10 +30,12 @@
                 <ul>
                     @foreach($userHotPosts as $post)
                         <li>
-                            <img src="{{ Croppa::url('/' . $post->image, 40, null, array('resize')) }}" 
-                                alt="{{ $post->name }}"
-                            />
-                            <h3>{{ $post->name }}</h3>
+                            <a title="{{ $post->name }}" href="{{ route('user.post.detail', [$post->slug]) }}">
+                                <img src="{{ Croppa::url('/' . $post->image, 40, null, array('resize')) }}" 
+                                    alt="{{ $post->name }}"
+                                />
+                                <h3>{{ $post->name }}</h3>
+                            </a>
                         </li>
                     @endforeach
                 </ul>
@@ -45,8 +47,8 @@
             <li>
                 @foreach($userBanners['ad'] as $bannerAd)
                     <a href="{{ $bannerAd->link }}" title="{{ $bannerAd->name }}" target="_blank"  rel="nofollow">
-                        <img alt="{{ $bannerAd->name }}" src="{{ Croppa::url('/' . $bannerAd->image, 190, null, array('resize')) }}" 
-                            style="width: 190px"
+                        <img src="{{ Croppa::url('/' . $bannerAd->image, 190, null, array('resize')) }}" 
+                            style="width: 190px" alt="{{ $bannerAd->name }}" 
                         />
                     </a>
                 @endforeach

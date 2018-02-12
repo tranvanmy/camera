@@ -59,7 +59,7 @@ class HomeController extends Controller
             $products = Product::where('status', Product::STATUS_SHOW)                
                 ->whereIn('category_id', $categoryIds)
                 ->orderBy('prioty', 'desc')->orderBy('id', 'desc')
-                ->paginate(10);
+                ->paginate(12);
 
             return view('user.category.parent-product', compact(['category', 'products']));
         }
@@ -100,7 +100,7 @@ class HomeController extends Controller
                 ->where('guide', 'like', "%{$key}%")
                 ->where('guide', 'like', "%{$key}%")
                 ->orderBy('prioty', 'desc')->orderBy('id', 'desc')
-                ->paginate(10);
+                ->paginate(16);
 
         return view('user.search.search', compact('products'));
     }
@@ -128,7 +128,7 @@ class HomeController extends Controller
             $products = Product::where('status', Product::STATUS_SHOW)                
                 ->where('category_id', $category->id)
                 ->orderBy('prioty', 'desc')->orderBy('id', 'desc')
-                ->paginate(10);
+                ->paginate(16);
 
             return view('user.category.children-product', compact(['category', 'products', 'categoryParent']));
         }
@@ -203,7 +203,7 @@ class HomeController extends Controller
     public function listPost()
     {
         $posts = Post::where('status', Post::STATUS_SHOW)
-            ->paginate(10);
+            ->paginate(12);
 
         return view('user.post.popular', compact(['posts']));
     }
