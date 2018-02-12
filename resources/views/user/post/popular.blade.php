@@ -34,6 +34,11 @@
                     </div>
                 @endforeach
                 <div style="clear:both"></div>
+                <div style="text-align:center;" class="pages">
+                    <div style="display:inline-block;">
+                        {{ $posts->links('user.component.custom-paginate') }}
+                    </div>
+                </div>
             </div>
         </div>
     </li>

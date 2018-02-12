@@ -32,9 +32,10 @@
                         <div class="clear"></div>
                     @endif
                 @endforeach
+                <div class="clear"></div>
                 <div style="text-align:center;" class="pages">
                     <div style="display:inline-block;">
-                        {{ $products->appends(['key' => url()->getRequest()->key])->links() }}
+                        {{ $products->links('user.component.custom-paginate') }}
                     </div>
                 </div>
             </div>
