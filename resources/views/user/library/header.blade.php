@@ -73,13 +73,13 @@
         </div>
         <div style="height: 70px; width: 970px; margin: 0 auto; overflow: hidden;">
             <div 
-                style="height: 70px; width: 970px; 
+                style="height: 70px; width: 1200px; 
                     margin: 0 0;animation: notify_textmove 25s linear infinite;
                     -webkit-animation: notify_textmove 25s linear infinite;"
             >
                 @foreach($userBanners['partner'] as $partner)
                     <a href="{{ $partner->link }}">
-                        <img alt="{{ $partner->name }}" height="55" src="/{{ $partner->image }}">
+                        <img alt="{{ $partner->name }}" height="50" src="/{{ $partner->image }}">
                     </a>
                 @endforeach
             </div>
