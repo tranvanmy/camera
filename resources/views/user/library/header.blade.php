@@ -8,7 +8,7 @@
 <div class="hdr">
     <div class="hdr_top" style="position:relative;">
         <a title="Trang chủ" class="logo" href="/">
-            @if ($options && $options['logo'])
+            @if ($options && $options['logo'] && $options['logo'] != 'images/icons/logo.png')
                 <img src="{{ Croppa::url('/' . $options['logo'], null, 76, array('resize')) }}" alt="Camera289" border="0" class="png">
             @else
                 <img src="/images/icons/logo.png" alt="Camera289" border="0" class="png">
@@ -75,7 +75,7 @@
             <div style="height:80px; width: 970px; margin: 0 auto;animation: notify_textmove 25s linear infinite;-webkit-animation: notify_textmove 25s linear infinite;">
                 @foreach($userBanners['partner'] as $partner)
                     <a href="{{ $partner->link }}">
-                        <img alt="{{ $partner->name }}" height="60" src="/{{ $partner->image }}" width="120">
+                        <img alt="{{ $partner->name }}" height="60" src="/{{ $partner->image }}">
                     </a>
                 @endforeach
             </div>

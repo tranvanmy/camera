@@ -14,3 +14,4 @@ let mix = require('laravel-mix');
 mix
     .js('resources/assets/admin/index.js', 'public/js/admin/index.js')
     .js('resources/assets/user/slider.js', 'public/js/user/slider.js')
+    .sass('resources/assets/user/css/screen.scss', 'public/css/user/screen.css')
