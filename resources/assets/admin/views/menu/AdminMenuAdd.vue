@@ -10,19 +10,9 @@
             <b-col sm="12">
                 <b-form validated>
                     <b-row>
-                        <b-col sm="6">
+                        <b-col sm="12">
                             <b-form-fieldset :label="$t('textName')">
                                 <b-form-input type="text" :placeholder="$t('textName')" v-model="formData.name" required />
-                            </b-form-fieldset>
-                        </b-col>
-                        <b-col sm="6">
-                            <b-form-fieldset :label="$t('textPosition')">
-                                <b-form-select
-                                    :plain="true" required
-                                    :options="optionPositionMenu"
-                                    v-model="formData.position"
-                                >
-                                </b-form-select>
                             </b-form-fieldset>
                         </b-col>
                     </b-row>
@@ -107,7 +97,6 @@
 </template>
 
 <script>
-import { ADMIN_MENU_POSITION_OPTION } from '../../store/menus'
 import { STORAGE_AUTH } from '../../store/auth'
 
 export default {
@@ -133,10 +122,6 @@ export default {
         let today = new Date()
 
         return {
-            optionPositionMenu: ADMIN_MENU_POSITION_OPTION.map(option => (
-                { value: option.value, text: this.$i18n.t(option.text) }
-            )),
-
             showUploadFile: true,
 
             formData: this.resetFormData(),
@@ -184,15 +169,13 @@ export default {
                 description: '',
                 path: '',
                 icon: '',
-                position: ADMIN_MENU_POSITION_OPTION[0].value,
             }
         },
 
         clickAddMenu() {
             let params = this.formData
-            // params.parent_id = params.parent_id ? params.parent_id : 0;
 
-            if (!params.name || !params.path || !params.position) {
+            if (!params.name || !params.path) {
                 return this.$toaster.error(this.$i18n.t('textNotFillEnough'))
             }
 

@@ -26,7 +26,7 @@ class UpdateTableBanner extends Migration
     public function down()
     {
         Schema::table('banners', function (Blueprint $table) {
-            $table->dropColumn('link')->nullable();
+            $table->dropColumn('link');
         });
     }
 }

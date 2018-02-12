@@ -5,112 +5,73 @@
 @section('seoKeyword', $category->seo_keywork)
 
 @section('content')
-<div class="contentwrapper background">
-        <div style="clear:both"></div>
-        <div class="span-19">
-            <h3 class="breakcolumn">
-                <a title="Trang chủ" href="/">
-                    <img src="/images/icons/home.png" alt="Trang chủ">
-                </a>
-                <span class="breakcolumn">»</span>
+    <li class="mcr">
+        <div class="box m">
+            <div class="btitle path" style="margin-bottom: 20px">
+                <a title="Trang chủ" href="/">Trang chủ</a>&nbsp;»&nbsp;
                 <a href="{{ route('user.category.parent', [$category->slug]) }}" title="{{ $category->name }}">
                     {{ $category->name }}
                 </a>
-            </h3>
-    
+            </div>
+
             @foreach ($categories as $childrenCategory)
                 @php
                     if (!$childrenCategory->posts->count()) { continue; }
                 @endphp
-                <div class="news_column">
-                    <div class="news-content bordersilver white clearfix">
-                        <div class="header clearfix">
-                            @if ($childrenCategory->parentCategory)
-                                <a 
-                                    title="{{ $category->name }}" 
-                                    class="current" 
-                                    href="{{ route('user.category.children', [$category->slug, $childrenCategory->slug]) }}"
-                                >
-                            @else
-                                <a 
-                                    title="{{ $childrenCategory->name }}" 
-                                    class="current" 
-                                    href="{{ route('user.category.parent', [$childrenCategory->slug]) }}"
-                                >
-                            @endif
-                                <span>
-                                    <span>{{ $childrenCategory->name }}</span>
-                                </span>
-                            </a>
-                        </div>
-                        <div class="clear"></div>
-                        @php
-                            $firstPost = $childrenCategory->posts->first();
-                        @endphp
-                        <div class="fixedwidth border_r items clearfix">
-                            <h3>
+                <div class="btitle" style="margin-top: 10px">
+                    @if ($childrenCategory->parentCategory)
+                        <a 
+                            title="{{ $category->name }}" 
+                            href="{{ route('user.category.children', [$category->slug, $childrenCategory->slug]) }}"
+                        >
+                    @else
+                        <a 
+                            title="{{ $childrenCategory->name }}" 
+                            href="{{ route('user.category.parent', [$childrenCategory->slug]) }}"
+                        >
+                    @endif
+                        <span>
+                            <span>{{ $childrenCategory->name }}</span>
+                        </span>
+                    </a>
+                </div>
+                <div class="bCt highLightNews">
+                    <div class="cols_bg">
+                        <ul class="ul" style="float:left; width:414px;">
+                            @php
+                                $firstPost = $childrenCategory->posts->first();
+                            @endphp
+                            <li class="f">
                                 <a title="{{ $firstPost->name }}" href="{{ route('user.post.detail', [$firstPost->slug]) }}">
-                                    {{ $firstPost->name }}
+                                    <span class="t">{{ $firstPost->name }}</span>
+                                    <img 
+                                        style="max-width:130px; max-height:100px; float:left;" 
+                                        border="0" alt="{{ $firstPost->name }}"
+                                        src="{{ Croppa::url('/' . $firstPost->image, 100, null, array('resize')) }}"
+                                    />    
                                 </a>
-                            </h3>
-                            <a title="{{ $firstPost->name }}" href="{{ route('user.post.detail', [$firstPost->slug]) }}">
-                                <img src="{{ Croppa::url('/' . $firstPost->image, 100, null, array('resize')) }}" 
-                                    alt="{{ $firstPost->name }}" width="100"
-                                />
-                            </a>
-                            <p>
-                                {!! $firstPost->description !!}
-                            </p>
-                        </div>
+                                <p>{!! $firstPost->description !!}</p>
+                            </li>
+                        </ul>
                         @php
                             $posts = $childrenCategory->posts->where('id', '<>', $firstPost->id);
                         @endphp
 
                         @if ($posts->count())
-                            <ul class="related fixedwidth">
+                            <ul class="ul" style="float:right; width:305px;">
                                 @foreach ($posts as $post)
-                                    <li>
+                                    <li  class="i">
                                         <a title="{{ $post->name }}" href="{{ route('user.post.detail', [$post->slug]) }}">
                                             {{ $post->name }}
                                         </a>
                                     </li>
                                 @endforeach
                             </ul>
-                        @endif                        
+                        @endif    
+                        <div style="clear:both"></div>
                     </div>
                 </div>
             @endforeach
-
         </div>
-        <div class="span-5 last">
-            <div class="box silver">
-                <div class="right_block_title">
-                    <div class="bg_left_title">
-                        <p>{{ $category->name }}</p>
-                    </div>
-                </div>
-                <div id="smoothmenu2" class="ddsmoothmenu-v">
-                    <ul class="ul_sub_menu">
-                        @foreach($category->childrenCategories as $children)
-                            <li class="">
-                                <a class="" 
-                                    title="{{ $children->name }}" 
-                                    href="{{ route('user.category.children', [$category->slug, $children->slug]) }}"
-                                >
-                                    {{ $children->name }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                    <br style="clear: left">
-                </div>
-            </div>
-
-            @include('user.library.news-hot')
-
-            @include('user.library.statistics')
-            
-        </div>
-        <div class="clear"></div>
-    </div>
+    </li>
 @endsection

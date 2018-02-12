@@ -8,6 +8,7 @@ use App\Models\Menu;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Extra;
+use App\Models\Banner;
 
 class DataComposer
 {
@@ -15,17 +16,20 @@ class DataComposer
     protected $category;
     protected $post;
     protected $extra;
+    protected $banner;
     
     public function __construct(
     	Menu $menu,
         Category $category,
         Post $post,
-        Extra $extra
+        Extra $extra,
+        Banner $banner
     ){
         $this->menu = $menu;
         $this->category = $category;
         $this->post = $post;
         $this->extra = $extra;
+        $this->banner = $banner;
     }
     /**
      * Bind data to the view.
@@ -87,6 +91,18 @@ class DataComposer
             $setups = $this->extra->where('position', Extra::POSITION_MAIN)->first();
 
             $view->with('userSetups', $setups);
+        }
+
+        if (Schema::hasTable($this->banner->getTable())) {
+            $banner['ad'] = Banner::where('status', Banner::STATUS_SHOW)
+                ->where('position', Banner::POSITION_AD)
+                ->orderBy('id', 'desc')->get();
+                
+            $banner['partner'] = Banner::where('status', Banner::STATUS_SHOW)
+                ->where('position', Banner::POSITION_PARTNER)
+                ->get();
+
+            $view->with('userBanners', $banner);
         }
     }
 }

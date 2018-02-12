@@ -26,7 +26,6 @@ class MenuRequest extends FormRequest
         return [
             'name' => 'required',
             'path' => 'required',
-            'position' => 'required',
             'prioty' => 'numeric',
         ];
     }
