@@ -42,7 +42,7 @@
             <h1>{{ $data['product']->name }}</h1>
             <ul class="ul view">
                 <li class="img">
-                    <a href="/media/product/1817_0_dahua.jpg" class="group1 cboxElement">
+                    <a href="javascript:void(0)" class="group1 cboxElement">
                         <img src="{{ Croppa::url('/' . $data['product']->image, 240, null, array('resize')) }}" 
                             alt="{{ $data['product']->name }}" width="140px" 
                             style="max-width:240px; max-height:200px;" border="0" 
