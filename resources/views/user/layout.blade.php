@@ -9,7 +9,7 @@
     <meta name="keywords" content="@yield('seoKeyword')">
     <meta content="DOCUMENT" name="RESOURCE-TYPE">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link href="/css/user/screen.css" type="text/css" rel="stylesheet">
+    <link href="{{ mix('/css/user/screen.css') }}" type="text/css" rel="stylesheet">
 
     @yield('addCss')
 </head>
