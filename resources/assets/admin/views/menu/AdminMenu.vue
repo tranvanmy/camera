@@ -33,7 +33,7 @@
                     :per-page="perPage"
                 >
                     <template slot="name" slot-scope="data">
-                        <img :src="`/${data.item.icon}`" v-if="data.item.icon" style="height: 37px">
+                        <!-- <img :src="`/${data.item.icon}`" v-if="data.item.icon" style="height: 37px"> -->
                         {{ data.item.name }}
                     </template>
                     <template slot="position" slot-scope="data">

@@ -172,7 +172,7 @@ export default {
             let formData = this.modalEdit.formData
             return {
                 ...formData,
-                status: formData.status == CATEGORY_STATUS_SHOW ? true : false,
+                status: formData.status === CATEGORY_STATUS_SHOW,
             }
         },
 

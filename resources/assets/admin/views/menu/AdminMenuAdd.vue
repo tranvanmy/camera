@@ -32,7 +32,7 @@
                             </b-form-fieldset>
                         </b-col>
                     </b-row>
-                    <b-row>
+                    <!-- <b-row>
                         <b-col sm="12">
                             <b-form-fieldset :label="$t('textIcon')"
                                 style="boder: 1px solid #E5E5E5"
@@ -54,7 +54,6 @@
                                         >{{ $t('textUploadFile') }}</button>
                                         </b-col>
                                     </b-row>
-                                    <!-- Scoped slot -->
                                     <template slot="files" slot-scope="props">
                                         <div v-for="(file, i) in props.files" :key="file.id" :class="{'mt-5': i === 0}">
                                             <div class="media">
@@ -73,7 +72,7 @@
                                 </vue-transmit>
                             </b-form-fieldset>
                         </b-col>
-                    </b-row>
+                    </b-row> -->
                     <b-form-fieldset :label="$t('textDescription')">
                         <b-form-input
                             v-model="formData.description"
