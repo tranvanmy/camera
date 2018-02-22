@@ -13,6 +13,7 @@ export default {
             for (let key in errors) {
                 errorString = errorString.concat(this.errorsToArray(errors[key]));
             }
+            
             return errorString;
         }
     },

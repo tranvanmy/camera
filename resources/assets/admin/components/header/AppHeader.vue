@@ -40,9 +40,12 @@
             </b-nav-item> -->
             <HeaderDropdown/>
         </b-navbar-nav>
-        <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" @click="asideToggle">
+        <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" @click="sidebarToggle">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" @click="asideToggle">
+            <span class="navbar-toggler-icon"></span>
+        </button> -->
     </header>
 </template>
 <script>

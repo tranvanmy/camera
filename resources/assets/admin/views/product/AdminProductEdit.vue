@@ -91,6 +91,7 @@
                                     tag="section"
                                     v-bind="uploadOptions"
                                     @success="successUploader"
+                                    @error="errorUploader"
                                     upload-area-classes="bg-faded"
                                     ref="uploader"
                                     style="border: 1px solid #E5E5E5"
@@ -309,6 +310,15 @@ export default {
             let serveRespone = JSON.parse(response.xhr.response)
             
             return this.formData.image = serveRespone.path
+        },
+
+        errorUploader(error) {
+            let files = this.$refs.uploader.files
+            let xhr = { response: JSON.parse(error.xhr.response) }
+            
+            this.$toaster.error(Helper.getFirstError(xhr, this.$i18n.t('textDefaultErrorRequest')))
+
+            return this.$refs.uploader.files.length = files.length - 1;
         },
 
         ortherOptions() {
