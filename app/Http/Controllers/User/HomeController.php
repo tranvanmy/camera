@@ -65,8 +65,7 @@ class HomeController extends Controller
         }
 
         if ($category->type === Category::TYPE_POST) {
-            $countPost = Post::where('status', Post::STATUS_SHOW)
-                ->whereIn('category_id', $categoryIds)->count();
+            $countPost = Post::whereIn('category_id', $categoryIds)->count();
 
             if ($countPost === 1) {
                 $post = Post::where('status', Post::STATUS_SHOW)
