@@ -68,8 +68,7 @@ class HomeController extends Controller
             $countPost = Post::whereIn('category_id', $categoryIds)->count();
 
             if ($countPost === 1) {
-                $post = Post::where('status', Post::STATUS_SHOW)
-                    ->whereIn('category_id', $categoryIds)->first();
+                $post = Post::whereIn('category_id', $categoryIds)->first();
                     
                 return view('user.category.one-post', compact(['category', 'post']));
             }
