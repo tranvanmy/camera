@@ -20,7 +20,6 @@ class Menu extends Model
         'description',
         'prioty',
         'path',
-        'icon',
     ];
 
     // public function childrenMenus()

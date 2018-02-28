@@ -6,10 +6,12 @@ export const POST_STATUS_SHOW = 'show'
 export const POST_STATUS_HIDDEN = 'hidden'
 
 const ADMIN_POST_FETCH = 'admin_post_fetch'
+const ADMIN_POST_SET_PAGE = 'admin_post_set_page'
 const ADMIN_POST_SET_POST = 'admin_post_set_post'
 
 const state = {
     posts: [],
+    currentPage: 1,
     edit: {
         post: {}
     }
@@ -18,6 +20,10 @@ const state = {
 const mutations = {
     [ADMIN_POST_FETCH](state, { posts }) {
         return state.posts = posts;
+    },
+
+    [ADMIN_POST_SET_PAGE](state, { page }) {
+        return state.currentPage = page
     },
 
     [ADMIN_POST_SET_POST](state, { post }) {
@@ -37,6 +43,10 @@ const actions = {
         }
 
         return vue.$toaster.error(Helper.getFirstError(response, vue.$i18n.t('textDefaultErrorRequest')));
+    },
+
+    actionPostSetPage({ commit }, { page }) {
+        return commit(ADMIN_POST_SET_PAGE, { page })
     },
 
     async callPostAdd({ commit }, { vue, params }) {

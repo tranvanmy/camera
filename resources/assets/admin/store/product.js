@@ -6,13 +6,15 @@ export const PRODUCT_STATUS_SHOW = 'show'
 export const PRODUCT_STATUS_HIDDEN = 'hidden'
 
 const ADMIN_PRODUCT_FETCH = 'admin_product_fetch'
+const ADMIN_PRODUCT_SET_PAGE = 'admin_product_set_page'
 const ADMIN_PRODUCT_SET_PRODUCT = 'admin_product_set_product'
 
 const state = {
     products: [],
     edit: {
         product: {}
-    }
+    },
+    currentPage: 1
 }
 
 const mutations = {
@@ -20,9 +22,13 @@ const mutations = {
         return state.products = products;
     },
 
+    [ADMIN_PRODUCT_SET_PAGE](state, { page }) {
+        return state.currentPage = page
+    },
+
     [ADMIN_PRODUCT_SET_PRODUCT](state, { product }) {
         return state.edit.product = product
-    }
+    },
 }
 
 const actions = {
@@ -37,6 +43,10 @@ const actions = {
         }
 
         return vue.$toaster.error(Helper.getFirstError(response, vue.$i18n.t('textDefaultErrorRequest')));
+    },
+
+    actionProductSetPage({ commit }, { page }) {
+        return commit(ADMIN_PRODUCT_SET_PAGE, { page })
     },
 
     async callProductAdd({ commit }, { vue, params }) {

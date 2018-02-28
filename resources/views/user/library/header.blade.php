@@ -21,7 +21,7 @@
             </span>
             <br/>
             <span style="font-size: large; color: #ff0000;" data-mce-mark="1">
-                <strong>Điện thoại : 0972.030.468 - 0968.930.743</strong>
+                <strong>Điện thoại : 0943.044.115 - 0975.801.420</strong>
             </span>
         </div>
         <div style="clear:both"></div>
