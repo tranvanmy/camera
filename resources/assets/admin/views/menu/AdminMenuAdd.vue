@@ -32,47 +32,6 @@
                             </b-form-fieldset>
                         </b-col>
                     </b-row>
-                    <!-- <b-row>
-                        <b-col sm="12">
-                            <b-form-fieldset :label="$t('textIcon')"
-                                style="boder: 1px solid #E5E5E5"
-                            >
-                                <vue-transmit
-                                    tag="section"
-                                    v-bind="uploadOptions"
-                                    @success="successUploader"
-                                    upload-area-classes="bg-faded"
-                                    ref="uploader"
-                                >
-                                    <b-row>
-                                        <b-col sm="2"
-                                            style="border-radius: 1px; boder: 1px solid #DCDCDC"
-                                            class="text-left"
-                                        >
-                                            <button class="btn btn-primary"
-                                            @click="triggerBrowse"
-                                        >{{ $t('textUploadFile') }}</button>
-                                        </b-col>
-                                    </b-row>
-                                    <template slot="files" slot-scope="props">
-                                        <div v-for="(file, i) in props.files" :key="file.id" :class="{'mt-5': i === 0}">
-                                            <div class="media">
-                                                <img :src="file.dataUrl" class="img-fluid d-flex mr-3">
-                                                <div class="media-body">
-                                                    <div class="progress">
-                                                        <div class="progress-bar bg-success"
-                                                            :style="{width: file.upload.progress + '%'}"
-                                                        >
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </template>
-                                </vue-transmit>
-                            </b-form-fieldset>
-                        </b-col>
-                    </b-row> -->
                     <b-form-fieldset :label="$t('textDescription')">
                         <b-form-input
                             v-model="formData.description"
@@ -117,50 +76,12 @@ export default {
     },
 
     data() {
-        let token = JSON.parse(localStorage.getItem(STORAGE_AUTH)).token
-        let today = new Date()
-
         return {
-            showUploadFile: true,
-
-            formData: this.resetFormData(),
-
-            uploadOptions: {
-                acceptedFileTypes: ['image/*'],
-                url: '/api/v0/upload-image',
-                clickable: false,
-                params: {
-                    folder: `menu-${today.getFullYear()}
-                        -${today.getMonth() + 1}
-                        -${today.getDate()}
-                    `,
-                },
-                maxFiles: 1,                
-                paramName: 'image',
-                headers: {
-                    Authorization: `${token.token_type} ${token.access_token}`
-                }
-            }
+            formData: this.resetFormData()
         }
     },
 
     methods: {
-        triggerBrowse(event) {
-            event.preventDefault()
-
-            if (this.$refs.uploader.files.length >= this.uploadOptions.maxFiles) {
-                return this.$toaster.error(this.$i18n.t('textNotAddFile'));
-            }
-            
-            return this.$refs.uploader.triggerBrowseFiles()
-        },
-
-        successUploader(response) {
-            let serveRespone = JSON.parse(response.xhr.response)
-            
-            return this.formData.icon = serveRespone.path
-        },
-
         resetFormData() {
             return this.formData = {
                 name: '',
@@ -179,7 +100,7 @@ export default {
             }
 
             this.resetFormData()
-            this.$refs.uploader.files = []
+            
             return this.submitModalAdd(params)
         }
     },

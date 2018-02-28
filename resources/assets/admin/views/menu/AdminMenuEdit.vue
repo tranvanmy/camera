@@ -126,55 +126,13 @@ export default {
         },
     },
 
-    data() {
-        let token = JSON.parse(localStorage.getItem(STORAGE_AUTH)).token
-        let today = new Date()
-
-        return {
-            uploadOptions: {
-                acceptedFileTypes: ['image/*'],
-                url: '/api/v0/upload-image',
-                clickable: false,
-                params: {
-                    folder: `product-${today.getFullYear()}
-                        -${today.getMonth() + 1}
-                        -${today.getDate()}
-                    `,
-                },
-                maxFiles: 1,                
-                paramName: 'image',
-                headers: {
-                    Authorization: `${token.token_type} ${token.access_token}`
-                }
-            }
-        }
-    },
-
     methods: {
-        triggerBrowse(event) {
-            event.preventDefault()
-
-            if (this.$refs.uploader.files.length >= this.uploadOptions.maxFiles) {
-                return this.$toaster.error(this.$i18n.t('textNotAddFile'));
-            }
-
-            return this.$refs.uploader.triggerBrowseFiles()
-        },
-
-        successUploader(response) {
-            let serveRespone = JSON.parse(response.xhr.response)
-            
-            return this.formData.icon = serveRespone.path
-        },
-
         clickEditMenu() {
             let params = this.formData
 
             if (!params.name || !params.path) {
                 return this.$toaster.error(this.$i18n.t('textNotFillEnough'))
             }
-
-            this.$refs.uploader.files = []
 
             return this.submitModalEdit(this.formData.id, params)
         },
