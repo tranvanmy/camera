@@ -70,7 +70,8 @@
                     <b-pagination 
                         :total-rows="filterItems.length" 
                         :per-page="perPage" 
-                        v-model="currentPage" 
+                        v-model="currentPage"
+                        @input="changePage"
                         prev-text="< Pre" 
                         next-text="Next >" 
                         hide-goto-end-buttons
@@ -106,7 +107,6 @@
                     {key: 'status', label: this.$i18n.t('textStatus')},
                     {key: 'action', label: this.$i18n.t('textAction')},
                 ],
-                currentPage: 1,
                 perPage: 10,
                 valueFilter: '',
             }
@@ -150,12 +150,20 @@
                         dangerMode: true,
                     })
                     && this.$store.dispatch('callPostDelete', { vue: this, id })
+            },
+
+            changePage(page) {
+                this.$store.dispatch('actionPostSetPage', { page })
             }
         },
 
         computed: {
             loading() {
                 return this.$store.state.storeLoading.loading
+            },
+
+            currentPage() {
+                return this.$store.state.storeAdminPost.currentPage
             },
 
             filterItems() {

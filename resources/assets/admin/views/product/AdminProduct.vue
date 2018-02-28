@@ -74,6 +74,7 @@
                         prev-text="< Pre" 
                         next-text="Next >" 
                         hide-goto-end-buttons
+                        @input="changePage"
                     />
                 </nav>
             </b-card>            
@@ -107,7 +108,6 @@ import category from '../../store/category';
                     {key: 'status', label: this.$i18n.t('textStatus')},
                     {key: 'action', label: this.$i18n.t('textAction')},
                 ],
-                currentPage: 1,
                 perPage: 10,
                 valueFilter: '',
             }
@@ -151,12 +151,20 @@ import category from '../../store/category';
                         dangerMode: true,
                     })
                     && this.$store.dispatch('callProductDelete', { vue: this, id })
+            },
+
+            changePage(page) {
+                this.$store.dispatch('actionProductSetPage', { page })
             }
         },
 
         computed: {
             loading() {
                 return this.$store.state.storeLoading.loading
+            },
+
+            currentPage() {
+                return this.$store.state.storeAdminProduct.currentPage
             },
 
             filterItems() {
