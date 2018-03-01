@@ -8,6 +8,7 @@ export const PRODUCT_STATUS_HIDDEN = 'hidden'
 const ADMIN_PRODUCT_FETCH = 'admin_product_fetch'
 const ADMIN_PRODUCT_SET_PAGE = 'admin_product_set_page'
 const ADMIN_PRODUCT_SET_PRODUCT = 'admin_product_set_product'
+const ADMIN_PRODUCT_DELETE = 'admin_product_delete'
 
 const state = {
     products: [],
@@ -25,9 +26,13 @@ const mutations = {
     [ADMIN_PRODUCT_SET_PAGE](state, { page }) {
         return state.currentPage = page
     },
-
+    
     [ADMIN_PRODUCT_SET_PRODUCT](state, { product }) {
         return state.edit.product = product
+    },
+
+    [ADMIN_PRODUCT_DELETE](state, { id }) {
+        return state.products = state.products.filter((p) => p.id !== id)
     },
 }
 
@@ -56,8 +61,6 @@ const actions = {
         vue.$store.dispatch('setAdminLoading', { ...loading, show: false })
         
         if (response.status == 200) {
-            vue.$store.dispatch('callFetchProducts', { vue })
-            
             vue.$toaster.success(response.data.message);
 
             return vue.$router.push({ path: '/products' })
@@ -88,8 +91,6 @@ const actions = {
         vue.$store.dispatch('setAdminLoading', { ...loading, show: false })
 
         if (response.status == 200) {
-            vue.$store.dispatch('callFetchProducts', { vue })
-
             vue.$toaster.success(response.data.message)
             
             return vue.$router.push({ path: '/products' })
@@ -105,7 +106,7 @@ const actions = {
         vue.$store.dispatch('setAdminLoading', { ...loading, show: false })
 
         if (response.status == 200) {
-            vue.$store.dispatch('callFetchProducts', { vue })
+            commit(ADMIN_PRODUCT_DELETE, { id })
 
             return vue.$toaster.success(response.data.message);
         }

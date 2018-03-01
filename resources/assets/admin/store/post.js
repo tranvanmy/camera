@@ -8,6 +8,7 @@ export const POST_STATUS_HIDDEN = 'hidden'
 const ADMIN_POST_FETCH = 'admin_post_fetch'
 const ADMIN_POST_SET_PAGE = 'admin_post_set_page'
 const ADMIN_POST_SET_POST = 'admin_post_set_post'
+const ADMIN_POST_DELETE = 'admin_post_delete'
 
 const state = {
     posts: [],
@@ -28,7 +29,11 @@ const mutations = {
 
     [ADMIN_POST_SET_POST](state, { post }) {
         return state.edit.post = post
-    }
+    },
+
+    [ADMIN_POST_DELETE](state, { id }) {
+        return state.posts = state.posts.filter((p) => p.id !== id)
+    },
 }
 
 const actions = {
@@ -56,8 +61,6 @@ const actions = {
         vue.$store.dispatch('setAdminLoading', { ...loading, show: false })
 
         if (response.status == 200) {
-            vue.$store.dispatch('callFetchPosts', { vue })
-            
             vue.$toaster.success(response.data.message);
 
             return vue.$router.push({ path: '/posts' })
@@ -88,8 +91,6 @@ const actions = {
         vue.$store.dispatch('setAdminLoading', { ...loading, show: false })
         
         if (response.status == 200) {
-            vue.$store.dispatch('callFetchPosts', { vue })
-
             vue.$toaster.success(response.data.message)
             
             return vue.$router.push({ path: '/posts' })
@@ -105,7 +106,7 @@ const actions = {
         vue.$store.dispatch('setAdminLoading', { ...loading, show: false })
 
         if (response.status == 200) {
-            vue.$store.dispatch('callFetchPosts', { vue })
+            commit(ADMIN_POST_DELETE, { id })
 
             return vue.$toaster.success(response.data.message);
         }
