@@ -56,8 +56,11 @@ class PostController extends ApiController
         $data = $request->all();
         $data['slug'] = str_slug($request->slug);
 
-        if (Post::create($data)) {
-            return $this->response(['message' => trans('message.add_success')]);
+        if ($post = Post::create($data)) {
+            return $this->response([
+                'message' => trans('message.add_success'),
+                'data' => $post,
+            ]);
         }
 
         return $this->response(['message' => trans('message.add_failed')], 401);
@@ -98,7 +101,10 @@ class PostController extends ApiController
         $post->slug = str_slug($request->slug);
 
         if ($post->save()) {
-            return $this->response(['message' => trans('message.edit_success')]);
+            return $this->response([
+                'message' => trans('message.edit_success'),
+                'data' => $post,
+            ]);
         }
     
         return $this->response(['message' => trans('message.edit_failed')], 401);

@@ -56,8 +56,11 @@ class ProductController extends ApiController
         $data = $request->all();
         $data['slug'] = str_slug($request->slug);
 
-        if (Product::create($data)) {
-            return $this->response(['message' => trans('message.add_success')]);
+        if ($product = Product::create($data)) {
+            return $this->response([
+                'message' => trans('message.add_success'),
+                'data' => $product,
+            ]);
         }
 
         return $this->response(['message' => trans('message.add_failed')], 401);
@@ -98,7 +101,10 @@ class ProductController extends ApiController
         $product->slug = str_slug($request->slug);
 
         if ($product->save()) {
-            return $this->response(['message' => trans('message.edit_success')]);
+            return $this->response([
+                'message' => trans('message.edit_success'),
+                'data' => $product,
+            ]);
         }
     
         return $this->response(['message' => trans('message.edit_failed')], 401);

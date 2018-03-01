@@ -122,7 +122,7 @@
             },
 
             getLinkPost(post) {
-                return `/news/${post.slug}`
+                return `/post/${post.slug}`
             },
 
             clickAddNewItem() {
