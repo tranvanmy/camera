@@ -4,9 +4,9 @@
             <span style="font-size:14px;">
                 <strong>Điện thoại : </strong>
                 0943.044.115 - 0975.801.420
+                <br/>
                 <strong>Địa chỉ : </strong>
                 Số 5, ngõ 289 Hoàng Mai, Hà Nội
-                <br/>
             </span>
             <br/>
         </span>
