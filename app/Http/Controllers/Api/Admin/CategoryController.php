@@ -113,6 +113,8 @@ class CategoryController extends ApiController
             if ($category->childrenCategories()->count()) {
                 return $this->response(['message' => trans('message.delete_children_before')], 401);
             }
+        } elseif ($category->posts()->count() || $category->products()->count()) {
+            return $this->response(['message' => trans('message.exits_product_or_post')], 401);
         }
 
         if ($category->delete()) {

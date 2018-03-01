@@ -8,4 +8,5 @@ return [
     'delete_success' => 'Delete successfully!',
     'delete_failed' => 'Delete failed!',
     'delete_children_before' => 'Exist children menu, can\'t delete this menu!',
+    'exits_product_or_post' => 'Exist product or post, can\'t delete this menu!',
 ];
