@@ -109,11 +109,11 @@ class CategoryController extends ApiController
      */
     public function destroy(Category $category)
     {
-        if (!$category->parent_id) {
-            if ($category->childrenCategories()->count()) {
-                return $this->response(['message' => trans('message.delete_children_before')], 401);
-            }
-        } elseif ($category->posts()->count() || $category->products()->count()) {
+        if (!$category->parent_id && $category->childrenCategories()->count()) {
+            return $this->response(['message' => trans('message.delete_children_before')], 401);
+        }
+        
+        if ($category->posts()->count() || $category->products()->count()) {
             return $this->response(['message' => trans('message.exits_product_or_post')], 401);
         }
 
