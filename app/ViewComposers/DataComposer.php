@@ -82,7 +82,7 @@ class DataComposer
                 ->where('status', POST::STATUS_SHOW)
                 ->orderBy('prioty', 'desc')
                 ->orderBy('id', 'desc')
-                ->take(5)->get();
+                ->take(3)->get();
 
             $view->with('userHotPosts', $posts);
         }
