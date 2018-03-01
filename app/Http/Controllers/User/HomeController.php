@@ -162,8 +162,7 @@ class HomeController extends Controller
             $categoryIds =  $parentCategory->childrenCategories()->pluck('id')->toArray();
         } else {
             $data['parentCategory'] = $data['product']->category;
-            $categories = $data['product']->category->childrenCategories()->pluck('id')->toArray();
-            $categoryIds = array_merge([$data['product']->category->id], $categories);
+            $categoryIds = [$data['product']->category->id];
         }
         
         $data['productRelation'] = Product::where('status', Product::STATUS_SHOW)
