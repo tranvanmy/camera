@@ -2,8 +2,8 @@ import { callApiFetchProducts, callApiAddProduct } from '../api/adminProduct'
 import { callApiEditProduct, callApiDeleteProduct, callApiShowProduct } from '../api/adminProduct'
 import Helper from '../library/Helper'
 
-export const PRODUCT_STATUS_SHOW = 'show'
-export const PRODUCT_STATUS_HIDDEN = 'hidden'
+export const PRODUCT_STATUS_SHOW = true
+export const PRODUCT_STATUS_HIDDEN = false
 
 const ADMIN_PRODUCT_FETCH = 'admin_product_fetch'
 const ADMIN_PRODUCT_SET_PAGE = 'admin_product_set_page'

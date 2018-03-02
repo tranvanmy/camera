@@ -15,7 +15,8 @@
                                 <b-form-input 
                                     type="text" required
                                     :placeholder="$t('textName')" 
-                                    v-model="formData.name" 
+                                    v-model="formData.name"
+                                    @input="handleChangeName"
                                 />
                             </b-form-fieldset>
                         </b-col>
@@ -36,7 +37,7 @@
                                 <b-form-input 
                                     type="text" required
                                     :placeholder="$t('textSlug')" 
-                                    v-model="formSlugName" 
+                                    v-model="slugName" 
                                 />
                             </b-form-fieldset>
                         </b-col>
@@ -135,7 +136,7 @@ export default {
         parentCategoryOption: {
             type:Array,
             required: true
-        }
+        },
     },
 
     data() {
@@ -143,19 +144,18 @@ export default {
             optionTypeCategory: ADMIN_CATEGORY_TYPE_OPTION.map(option => (
                 { value: option.value, text: this.$i18n.t(option.text) }
             )),
-            formData: this.resetFromData()
+            slugName: ''
         }
     },
 
     methods: {
-        resetFromData() {
+        resetFormData() {
             return this.formData = {
                 name: '',
-                slug: '',
                 status: true,
                 prioty: 0,
                 parent_id: '',
-                type: ADMIN_CATEGORY_TYPE_OPTION[0].value,                
+                type: this.$store.state.storeAdminCategory.currentTab,                
                 description: '',
                 seo_keyword: '',
                 seo_description: '',
@@ -163,16 +163,20 @@ export default {
         },
 
         clickAddItem() {
-            let params = this.formData
-            console.log(this.formData)
+            let params = { ...this.formData, slug: this.slugName }
+
             if (!params.name || !params.slug || !params.type) {
                 return this.$toaster.error(this.$i18n.t('textNotFillEnough'))
             }
 
-            this.resetFromData()
+            this.resetFormData()
 
             return this.submitModalAdd(params)
-        }
+        },
+
+        handleChangeName() {
+            return this.slugName = slug(this.formData.name)
+        },
     },
 
     computed: {
@@ -180,16 +184,15 @@ export default {
             get() {
                 return this.modalAdd.open
             },
-            set(val) {}
+            set(val) {},
         },
-        formSlugName: {
+
+        formData: {
             get() {
-                return slug(this.formData.name.toLowerCase())
+                return { ...this.resetFormData() }
             },
-            set(val) {
-                return this.formData.slug = val
-            }
-        }
-    }
+            set(val) {},
+        }, 
+    },
 }
 </script>

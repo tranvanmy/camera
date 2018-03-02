@@ -170,10 +170,7 @@ export default {
         },
         formData() {
             let formData = this.modalEdit.formData
-            return {
-                ...formData,
-                status: formData.status === CATEGORY_STATUS_SHOW,
-            }
+            return formData
         },
 
         formSlugName: {

@@ -25,19 +25,21 @@
                     :title="$t(option.text)"
                     v-for="option in optionPosition"
                     :key="option.value"
+                    @click="handleChangeTab(option.value)"
                 >
                     <b-table
-                        :hover="hover" :striped="striped"
-                        :bordered="bordered" :small="small"
-                        :fixed="fixed" class="table-responsive-sm"
+                        class="mb-0 table-outline text-center"                    
+                        head-variant="light"
+                        :hover="true" :striped="false"
+                        :bordered="true" :fixed="true" 
                         :items="getItemFilter(option.value)"
                         :fields="fields"
                         :current-page="currentPage"
                         :per-page="perPage"
                     >
                         <template slot="status" slot-scope="data">
-                            <b-button size="sm" :variant="data.item.status == 'show' ? 'success' : 'danger'">
-                                {{ $t(data.item.status) }}
+                            <b-button size="sm" :variant="data.item.status ? 'success' : 'danger'">
+                                {{ $t(data.item.status ? 'show' : 'hidden') }}
                             </b-button>
                         </template>
                         <template slot="image" slot-scope="data">
@@ -87,28 +89,6 @@
     export default {
         name: 'AdminMenu',
         components: { AdminBannerAdd, AdminBannerEdit },
-        props: {
-            hover: {
-                type: Boolean,
-                default: false
-            },
-            striped: {
-                type: Boolean,
-                default: false
-            },
-            bordered: {
-                type: Boolean,
-                default: false
-            },
-            small: {
-                type: Boolean,
-                default: false
-            },
-            fixed: {
-                type: Boolean,
-                default: false
-            },
-        },
 
         beforeCreate() {
             Helper.changeTitleAdminPage(this.$i18n.t('textManageBanner'))
@@ -158,10 +138,7 @@
             },
 
             convertDataSubmit(params) {
-                return {
-                    ...params,
-                    status: params.status ? BANNER_STATUS_SHOW : BANNER_STATUS_HIDDEN
-                }
+                return params
             },
 
             submitModalAdd(params) {
@@ -175,7 +152,7 @@
             },
 
             clickEditMenu(formData) {
-                let modalEdit = { ...this.modalEdit, open: true, formData }
+                let modalEdit = { ...this.modalEdit, open: true, formData: { ...formData } }
 
                 return this.$store.dispatch('setBannerModalEdit', { vue: this, modalEdit })
             },
@@ -203,7 +180,11 @@
                         dangerMode: true,
                     })
                     && this.$store.dispatch('callBannerDelete', { vue: this, id })
-            }
+            },
+
+            handleChangeTab(value) {
+                return this.$store.dispatch('actionBannerChangeTab', value)
+            },
         },
 
         computed: {

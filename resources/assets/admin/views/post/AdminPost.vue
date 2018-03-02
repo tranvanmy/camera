@@ -29,8 +29,8 @@
                     :per-page="perPage"
                 >
                     <template slot="status" slot-scope="data">
-                        <b-button size="sm" :variant="data.item.status == 'show' ? 'success' : 'danger'">
-                            {{ $t(data.item.status) }}
+                        <b-button size="sm" :variant="data.item.status ? 'success' : 'danger'">
+                            {{ $t(data.item.status ? 'show' : 'hidden') }}
                         </b-button >
                     </template>
                     <template slot="category" slot-scope="data">
@@ -132,8 +132,7 @@
             convertDataSubmit(params) {
                 return {
                     ...params,
-                    parent_id: params.parent_id ? params.parent_id : null,
-                    status: params.status ? POST_STATUS_SHOW : POST_STATUSostN
+                    parent_id: params.parent_id ? params.parent_id : null
                 }
             },
 

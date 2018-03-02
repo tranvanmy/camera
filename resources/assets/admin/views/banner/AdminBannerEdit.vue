@@ -137,6 +137,7 @@ import cSwitch from '../../../components/Switch.vue'
 import { ADMIN_BANNER_POSITION_OPTION } from '../../store/banner'
 import { BANNER_STATUS_SHOW } from '../../store/banner'
 import { STORAGE_AUTH } from '../../store/auth'
+import Helper from '../../library/Helper'
 
 export default {
     name: 'AdminMenuEdit',
@@ -224,7 +225,7 @@ export default {
             }
 
             this.$refs.uploader.files = []
-
+            
             return this.submitModalEdit(this.formData.id, params)
         },
     },
@@ -239,10 +240,8 @@ export default {
         },
         formData() {
             let formData = this.modalEdit.formData
-            return {
-                ...formData,
-                status: formData.status == BANNER_STATUS_SHOW ? true : false,
-            }
+            
+            return { ...formData }
         },
     }
 }

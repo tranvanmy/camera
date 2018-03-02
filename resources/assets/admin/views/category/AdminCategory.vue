@@ -26,6 +26,7 @@
                     :title="$t(option.text)"
                     v-for="option in optionType"
                     :key="option.value"
+                    @click="handleChangeTab(option.value)"
                 >
                     <b-table
                         class="mb-0 table-outline text-center"                    
@@ -38,8 +39,8 @@
                         :per-page="perPage"
                     >
                         <template slot="status" slot-scope="data">
-                            <b-button size="sm" :variant="data.item.status == 'show' ? 'success' : 'danger'">
-                                {{ $t(data.item.status) }}
+                            <b-button size="sm" :variant="data.item.status ? 'success' : 'danger'">
+                                {{ $t(data.item.status ? 'show' : 'hidden') }}
                             </b-button>
                         </template>
                         <template slot="name" slot-scope="data">
@@ -90,7 +91,6 @@
         data() {
             return {
                 fields: [
-                    // {key: 'id'},
                     {key: 'name', label: this.$i18n.t('textName'), tdClass: 'text-left'},
                     {key: 'link', label: this.$i18n.t('textLink'), tdClass: 'text-left'},
                     {key: 'prioty', label: this.$i18n.t('textPrioty')},
@@ -140,8 +140,7 @@
             convertDataSubmit(params) {
                 return {
                     ...params,
-                    parent_id: params.parent_id ? params.parent_id : null,
-                    status: params.status ? CATEGORY_STATUS_SHOW : CATEGORY_STATUS_HIDDEN
+                    parent_id: params.parent_id ? params.parent_id : null
                 }
             },
 
@@ -152,7 +151,7 @@
             },
 
             clickEditItem(formData) {
-                let modalEdit = { ...this.modalEdit, open: true, formData }
+                let modalEdit = { ...this.modalEdit, open: true, formData: { ...formData } }
 
                 return this.$store.dispatch('setCategoryModalEdit', { vue: this, modalEdit })
             },
@@ -180,7 +179,11 @@
                         dangerMode: true,
                     })
                     && this.$store.dispatch('callCategoryDelete', { vue: this, id })
-            }
+            },
+
+            handleChangeTab(value) {
+                return this.$store.dispatch('actionCategoryChangeTab', value)
+            },
         },
 
         computed: {
@@ -189,8 +192,6 @@
             },
 
             items() {
-                // return this.$store.state.storeAdminCategory.categories
-
                 let categories = this.$store.state.storeAdminCategory.categories
 
                 let itemsFilter = []

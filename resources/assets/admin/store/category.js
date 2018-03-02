@@ -5,8 +5,8 @@ import Helper from '../library/Helper'
 export const CATEGORY_TYPE_PRODUCT = 'product'
 export const CATEGORY_TYPE_POST = 'post'
 
-export const CATEGORY_STATUS_SHOW = 'show'
-export const CATEGORY_STATUS_HIDDEN = 'hidden'
+export const CATEGORY_STATUS_SHOW = true
+export const CATEGORY_STATUS_HIDDEN = false
 
 
 export const ADMIN_CATEGORY_TYPE_OPTION = [
@@ -17,6 +17,7 @@ export const ADMIN_CATEGORY_TYPE_OPTION = [
 const ADMIN_CATEGORY_FETCH = 'admin_category_fetch'
 const ADMIN_CATEGORY_MODAL_ADD = 'admin_category_modal_add'
 const ADMIN_CATEGORY_MODAL_EDIT = 'admin_category_modal_edit'
+const ADMIN_CATEGORY_CHANGE_TAB = 'admin_category_change_tab'
 
 const state = {
     categories: [],
@@ -26,7 +27,8 @@ const state = {
     modalEdit: {
         open: false,
         formData: {}
-    }
+    },
+    currentTab: ADMIN_CATEGORY_TYPE_OPTION[0].value,
 }
 
 const mutations = {
@@ -40,7 +42,11 @@ const mutations = {
 
     [ADMIN_CATEGORY_MODAL_EDIT](state, { modalEdit }) {
         return state.modalEdit = modalEdit;
-    }
+    },
+
+    [ADMIN_CATEGORY_CHANGE_TAB](state, { value }) {
+        return state.currentTab = value
+    },
 }
 
 const actions = {
@@ -51,7 +57,14 @@ const actions = {
         vue.$store.dispatch('setAdminLoading', { ...loading, show: false })
 
         if (response.status == 200) {
-            return commit(ADMIN_CATEGORY_FETCH, { categories: response.data });
+            let categories = response.data.map((category) => {
+                return { 
+                    ...category, 
+                    status: category.status ? true: false
+                }
+            })
+
+            return commit(ADMIN_CATEGORY_FETCH, { categories });
         }
 
         return vue.$toaster.error(Helper.getFirstError(response, vue.$i18n.t('textDefaultErrorRequest')));
@@ -118,7 +131,11 @@ const actions = {
         }
 
         return vue.$toaster.error(Helper.getFirstError(response, vue.$i18n.t('textDefaultErrorRequest')));
-    }
+    },
+
+    actionCategoryChangeTab({ commit }, value) {
+        return commit(ADMIN_CATEGORY_CHANGE_TAB, { value })
+    },
 }
 
 const storeAdminCategory = {

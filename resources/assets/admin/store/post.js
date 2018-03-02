@@ -2,8 +2,8 @@ import { callApiFetchPosts, callApiAddPost } from '../api/adminPost'
 import { callApiEditPost, callApiDeletePost, callApiShowPost } from '../api/adminPost'
 import Helper from '../library/Helper'
 
-export const POST_STATUS_SHOW = 'show'
-export const POST_STATUS_HIDDEN = 'hidden'
+export const POST_STATUS_SHOW = true
+export const POST_STATUS_HIDDEN = false
 
 const ADMIN_POST_FETCH = 'admin_post_fetch'
 const ADMIN_POST_SET_PAGE = 'admin_post_set_page'

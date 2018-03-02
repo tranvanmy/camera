@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    const STATUS_SHOW = 'show';
-    const STATUS_HIDDEN = 'hidden';
+    const STATUS_SHOW = true;
+    const STATUS_HIDDEN = false;
 
     protected $fillable = [
         'name',
@@ -29,5 +29,10 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function getStatusAttribute($value)
+    {
+        return $value ? true : false;
     }
 }

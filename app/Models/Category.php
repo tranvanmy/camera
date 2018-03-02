@@ -9,8 +9,8 @@ class Category extends Model
     const TYPE_PRODUCT = 'product';
     const TYPE_POST = 'post';
 
-    const STATUS_SHOW = 'show';
-    const STATUS_HIDDEN = 'hidden';
+    const STATUS_SHOW = true;
+    const STATUS_HIDDEN = false;
 
     protected $fillable = [
         'name',
@@ -23,6 +23,11 @@ class Category extends Model
         'seo_keyword',
         'seo_description',
     ];
+
+    public function getStatusAttribute($value)
+    {
+        return $value ? true : false;
+    }
 
     public function childrenCategories()
     {
