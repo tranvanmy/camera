@@ -131,6 +131,7 @@ import cSwitch from '../../../components/Switch.vue'
 
 import { ADMIN_BANNER_POSITION_OPTION } from '../../store/banner'
 import { STORAGE_AUTH } from '../../store/auth'
+import Helper from '../../library/Helper'
 
 export default {
     name: 'AdminMenuAdd',
@@ -163,7 +164,7 @@ export default {
 
             showUploadFile: true,
 
-            formData: this.resetFormData(),
+            // formData: this.resetFormData(),
 
             uploadOptions: {
                 acceptedFileTypes: ['image/*'],
@@ -215,7 +216,7 @@ export default {
                 name: '',
                 link: '',
                 image: '',
-                position: ADMIN_BANNER_POSITION_OPTION[0].value,
+                position: this.$store.state.storeAdminBanner.currentTab,
                 status: true,
                 seo_keyword: '',
                 seo_description: '',
@@ -246,6 +247,15 @@ export default {
                 return this.modalAdd.open
             },
             set(val) {
+            }
+        },
+
+        formData: {
+            get() {
+                return { ...this.resetFormData() }
+            },
+            set(val) {
+
             }
         }
     }

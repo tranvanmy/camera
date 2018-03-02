@@ -270,8 +270,7 @@ export default {
             let formData = this.$store.state.storeAdminProduct.edit.product
             return {
                 ...formData,
-                currentImage: formData.image,
-                status: formData.status == PRODUCT_STATUS_SHOW ? true : false,
+                currentImage: formData.image
             }
         },
     },

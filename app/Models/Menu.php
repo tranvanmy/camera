@@ -21,13 +21,4 @@ class Menu extends Model
         'prioty',
         'path',
     ];
-
-    // public function childrenMenus()
-    // {
-    //     return $this->hasMany(Menu::class, 'parent_id');
-    // }
-    // public function parentMenu()
-    // {
-    //     return $this->belongsTo(Menu::class, 'parent_id');
-    // }
 }

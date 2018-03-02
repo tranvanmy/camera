@@ -6,8 +6,8 @@ export const BANNER_POSITION_SLIDER = 'banner'
 export const BANNER_POSITION_AD = 'ad'
 export const BANNER_POSITION_PARTNER = 'partner';
 
-export const BANNER_STATUS_SHOW = 'show'
-export const BANNER_STATUS_HIDDEN = 'hidden'
+export const BANNER_STATUS_SHOW = true
+export const BANNER_STATUS_HIDDEN = false
 
 
 export const ADMIN_BANNER_POSITION_OPTION = [
@@ -19,6 +19,7 @@ export const ADMIN_BANNER_POSITION_OPTION = [
 const ADMIN_BANNER_FETCH = 'admin_banner_fetch'
 const ADMIN_BANNER_MODAL_ADD = 'admin_banner_modal_add'
 const ADMIN_BANNER_MODAL_EDIT = 'admin_banner_modal_edit'
+const ADMIN_BANNER_CHANGE_TAB = 'admin_banner_change_tab'
 
 const state = {
     banners: [],
@@ -28,7 +29,8 @@ const state = {
     modalEdit: {
         open: false,
         formData: {}
-    }
+    },
+    currentTab: ADMIN_BANNER_POSITION_OPTION[0].value,
 }
 
 const mutations = {
@@ -42,7 +44,11 @@ const mutations = {
 
     [ADMIN_BANNER_MODAL_EDIT](state, { modalEdit }) {
         return state.modalEdit = modalEdit;
-    }
+    },
+
+    [ADMIN_BANNER_CHANGE_TAB](state, { value }) {
+        return state.currentTab = value
+    },
 }
 
 const actions = {
@@ -53,7 +59,14 @@ const actions = {
         vue.$store.dispatch('setAdminLoading', { ...loading, show: false })
 
         if (response.status == 200) {
-            return commit(ADMIN_BANNER_FETCH, { banners: response.data });
+            let banners = response.data.map((banner) => {
+                return { 
+                    ...banner, 
+                    status: banner.status ? true: false
+                }
+            })
+
+            return commit(ADMIN_BANNER_FETCH, { banners });
         }
 
         return vue.$toaster.error(Helper.getFirstError(response, vue.$i18n.t('textDefaultErrorRequest')));
@@ -120,7 +133,11 @@ const actions = {
         }
 
         return vue.$toaster.error(Helper.getFirstError(response, vue.$i18n.t('textDefaultErrorRequest')));
-    }
+    },
+
+    actionBannerChangeTab({ commit }, value) {
+        return commit(ADMIN_BANNER_CHANGE_TAB, { value })
+    },
 }
 
 const storeAdminBanner = {

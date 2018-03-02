@@ -238,8 +238,7 @@ export default {
             let formData = this.$store.state.storeAdminPost.edit.post
             return {
                 ...formData,
-                currentImage: formData.image,
-                status: formData.status == POST_STATUS_SHOW ? true : false,
+                currentImage: formData.image
             }
         },
     },

@@ -113,7 +113,7 @@
             },
 
             clickEditMenu(formData) {
-                let modalEdit = { ...this.modalEdit, open: true, formData }
+                let modalEdit = { ...this.modalEdit, open: true, formData: { ...formData } }
 
                 return this.$store.dispatch('setMenuModalEdit', { vue: this, modalEdit })
             },

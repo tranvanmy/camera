@@ -31,7 +31,7 @@ class ProductController extends ApiController
             }]);
         }])
         ->orderBy('id', 'desc')->get();
-
+        
         return $this->response($products);
     }
 
