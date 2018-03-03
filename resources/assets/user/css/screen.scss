@@ -8,7 +8,8 @@ body {
 }
 
 img {
-	border: 0px;
+	border: 1px solid #DCDCDC;
+	border-radius: 5px;
 }
 
 a:link, a:visited {
@@ -346,7 +347,7 @@ ul.catLs li.l a:visited, ul.catLs li.l a:link {
 	padding-top: 0px;
 	float: left;
 	padding-right: 0px;
-	width: 782px;
+	width: 781px;
 }
 
 .productLs .it {
@@ -370,12 +371,14 @@ ul.catLs li.l a:visited, ul.catLs li.l a:link {
 	color: #727171
 }
 
-.productLs .it a span {
-	font-weight: bold;
-	display: block;
-	margin-bottom: 7px;
-	height: 38px;
-	overflow: hidden
+.productLs .it a {
+	span {
+		font-weight: bold;
+		display: block;
+		margin-bottom: 7px;
+		height: 26px;
+		overflow: hidden
+	}
 }
 
 .productLs .it p {
