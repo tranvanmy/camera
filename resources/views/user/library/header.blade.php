@@ -9,9 +9,15 @@
     <div class="hdr_top" style="position:relative;">
         <a title="Trang chủ" class="logo" href="/">
             @if ($options && $options['logo'] && $options['logo'] != 'images/icons/logo.png')
-                <img src="{{ Croppa::url('/' . $options['logo'], null, 76, array('resize')) }}" alt="Camera289" border="0" class="png">
+                <img src="{{ Croppa::url('/' . $options['logo'], null, 76, array('resize')) }}" 
+                    alt="Camera289" border="0" class="png"
+                    style="border:none"
+                />
             @else
-                <img src="/images/icons/logo.png" alt="Camera289" border="0" class="png">
+                <img src="/images/icons/logo.png" alt="Camera289" 
+                    border="0" class="png"
+                    style="border:none"
+                />
             @endif
         </a>
         <div id="support-header-right">
