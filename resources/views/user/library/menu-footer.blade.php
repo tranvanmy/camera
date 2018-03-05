@@ -4,7 +4,7 @@
             if (!$postCategory->childrenCategories->count()) continue;
         @endphp
 
-        <ul class="ul">
+        <ul class="ul column">
             <li class="c">
                 <ul class="ul">
                     <li class="t">
