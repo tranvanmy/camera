@@ -48,7 +48,9 @@
                         </b-col>
                         <b-col sm="6">
                             <b-form-fieldset :label="$t('textPrioty')">
-                                <b-form-input type="number" :placeholder="$t('textPrioty')" v-model.number="formData.prioty" />
+                                <b-form-input type="number" :placeholder="$t('textPrioty')" 
+                                    v-model.number="formData.prioty" 
+                                />
                             </b-form-fieldset>
                         </b-col>
                     </b-row>
