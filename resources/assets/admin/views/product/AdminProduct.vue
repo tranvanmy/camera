@@ -4,7 +4,11 @@
             <b-row>
                 <b-col lg="3"></b-col>
                 <b-col lg="6" class="text-center" style="padding-bottom: 20px">
-                    <b-form-input type="text" :placeholder="$t('textInputFilter')" v-model="valueFilter" />
+                    <b-form-input 
+                        type="text" :value="valueFilter"
+                        :placeholder="$t('textInputFilter')" 
+                        @input="handleChangeValueFilter" 
+                    />
                 </b-col>
                 <b-col lg="3">
                     <b-button-group class="pull-right">
@@ -109,7 +113,6 @@ import category from '../../store/category';
                     {key: 'action', label: this.$i18n.t('textAction')},
                 ],
                 perPage: 10,
-                valueFilter: '',
             }
         },
 
@@ -154,7 +157,11 @@ import category from '../../store/category';
 
             changePage(page) {
                 this.$store.dispatch('actionProductSetPage', { page })
-            }
+            },
+
+            handleChangeValueFilter(value) {
+                return this.$store.dispatch('actionProductSetFilter', { value: value.trim() })
+            },
         },
 
         computed: {
@@ -166,6 +173,10 @@ import category from '../../store/category';
                 return this.$store.state.storeAdminProduct.currentPage
             },
 
+            valueFilter() {
+                return this.$store.state.storeAdminProduct.valueFilter
+            },
+
             filterItems() {
                 let valueFilter = this.valueFilter.trim().toLowerCase();
 
@@ -174,11 +185,18 @@ import category from '../../store/category';
                 }
 
                 return this.items.filter(item => {
+                    if (item.category.name.toLowerCase().indexOf(valueFilter) !== -1) return true
+
+                    if (item.category.parent_category
+                        && item.category.parent_category.name.toLowerCase().indexOf(valueFilter) !== -1
+                    ) return true
+
                     for (let i in item) {
+                        if (i == 'category') continue
                         if (String(item[i]).toLowerCase().indexOf(valueFilter) !== -1) return true
                     }
 
-                    return false;
+                    return false
                 })
             },
 

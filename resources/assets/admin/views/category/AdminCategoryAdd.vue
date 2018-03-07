@@ -37,13 +37,16 @@
                                 <b-form-input 
                                     type="text" required
                                     :placeholder="$t('textSlug')" 
-                                    v-model="slugName" 
+                                    v-model="formData.slug" 
                                 />
                             </b-form-fieldset>
                         </b-col>
                         <b-col sm="4">
                             <b-form-fieldset :label="$t('textPrioty')">
-                                <b-form-input type="number" :placeholder="$t('textPrioty')" v-model.number="formData.prioty" />
+                                <b-form-input 
+                                    type="number" :placeholder="$t('textPrioty')" 
+                                    v-model.number="formData.prioty" 
+                                />
                             </b-form-fieldset>
                         </b-col>
                     </b-row>
@@ -62,7 +65,7 @@
                                 <b-form-select
                                     :plain="true" required
                                     :options="optionTypeCategory"
-                                    v-model="formData.type"
+                                    v-model="formDataType"
                                 >
                                 </b-form-select>
                             </b-form-fieldset>
@@ -144,7 +147,7 @@ export default {
             optionTypeCategory: ADMIN_CATEGORY_TYPE_OPTION.map(option => (
                 { value: option.value, text: this.$i18n.t(option.text) }
             )),
-            slugName: ''
+            formData: this.resetFormData(),
         }
     },
 
@@ -152,6 +155,7 @@ export default {
         resetFormData() {
             return this.formData = {
                 name: '',
+                slug: '',
                 status: true,
                 prioty: 0,
                 parent_id: '',
@@ -163,7 +167,7 @@ export default {
         },
 
         clickAddItem() {
-            let params = { ...this.formData, slug: this.slugName }
+            let params = { ...this.formData }
 
             if (!params.name || !params.slug || !params.type) {
                 return this.$toaster.error(this.$i18n.t('textNotFillEnough'))
@@ -175,7 +179,7 @@ export default {
         },
 
         handleChangeName() {
-            return this.slugName = slug(this.formData.name)
+            return this.formData.slug = slug(this.formData.name.toLowerCase())
         },
     },
 
@@ -187,11 +191,13 @@ export default {
             set(val) {},
         },
 
-        formData: {
+        formDataType: {
             get() {
-                return { ...this.resetFormData() }
+                return this.$store.state.storeAdminCategory.currentTab
             },
-            set(val) {},
+            set(val) {
+                return this.formData.type = val
+            },
         }, 
     },
 }
