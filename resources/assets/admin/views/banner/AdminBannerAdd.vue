@@ -41,7 +41,7 @@
                                 <b-form-select
                                     :plain="true" required
                                     :options="optionPosition"
-                                    v-model="formData.position"
+                                    v-model="formDataPosition"
                                 >
                                 </b-form-select>
                             </b-form-fieldset>
@@ -164,7 +164,7 @@ export default {
 
             showUploadFile: true,
 
-            // formData: this.resetFormData(),
+            formData: this.resetFormData(),
 
             uploadOptions: {
                 acceptedFileTypes: ['image/*'],
@@ -250,14 +250,14 @@ export default {
             }
         },
 
-        formData: {
+        formDataPosition: {
             get() {
-                return { ...this.resetFormData() }
+                return this.$store.state.storeAdminBanner.currentTab
             },
             set(val) {
-
-            }
-        }
+                return this.formData.position = val
+            },
+        },
     }
 }
 </script>
