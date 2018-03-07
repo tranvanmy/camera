@@ -191,8 +191,9 @@ import category from '../../store/category';
                         && item.category.parent_category.name.toLowerCase().indexOf(valueFilter) !== -1
                     ) return true
 
+                    let ignore = ['category', 'detail', 'guide', 'image']
                     for (let i in item) {
-                        if (i == 'category') continue
+                        if (ignore.indexOf(i) !== -1) continue
                         if (String(item[i]).toLowerCase().indexOf(valueFilter) !== -1) return true
                     }
 
