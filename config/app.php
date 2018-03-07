@@ -178,7 +178,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ComposerProvider::class,
         Bkwld\Croppa\ServiceProvider::class,
-        Weboap\Visitor\VisitorServiceProvider::class
 
     ],
 
