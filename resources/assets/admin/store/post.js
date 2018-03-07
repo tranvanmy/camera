@@ -9,13 +9,15 @@ const ADMIN_POST_FETCH = 'admin_post_fetch'
 const ADMIN_POST_SET_PAGE = 'admin_post_set_page'
 const ADMIN_POST_SET_POST = 'admin_post_set_post'
 const ADMIN_POST_DELETE = 'admin_post_delete'
+const ADMIN_POST_SET_FILTER = 'admin_post_set_filter'
 
 const state = {
     posts: [],
     currentPage: 1,
     edit: {
         post: {}
-    }
+    },
+    valueFilter: '',
 }
 
 const mutations = {
@@ -33,6 +35,10 @@ const mutations = {
 
     [ADMIN_POST_DELETE](state, { id }) {
         return state.posts = state.posts.filter((p) => p.id !== id)
+    },
+
+    [ADMIN_POST_SET_FILTER](state, { value }) {
+        return state.valueFilter = value
     },
 }
 
@@ -112,7 +118,11 @@ const actions = {
         }
 
         return vue.$toaster.error(Helper.getFirstError(response, vue.$i18n.t('textDefaultErrorRequest')));
-    }
+    },
+
+    actionPostSetFilter({ commit }, { value }) {
+        return commit(ADMIN_POST_SET_FILTER, { value })
+    },
 }
 
 const storeAdminPost = {

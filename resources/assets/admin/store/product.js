@@ -9,13 +9,15 @@ const ADMIN_PRODUCT_FETCH = 'admin_product_fetch'
 const ADMIN_PRODUCT_SET_PAGE = 'admin_product_set_page'
 const ADMIN_PRODUCT_SET_PRODUCT = 'admin_product_set_product'
 const ADMIN_PRODUCT_DELETE = 'admin_product_delete'
+const ADMIN_PRODUCT_SET_FILTER = 'admin_product_set_filter'
 
 const state = {
     products: [],
     edit: {
         product: {}
     },
-    currentPage: 1
+    currentPage: 1,
+    valueFilter: '',
 }
 
 const mutations = {
@@ -33,6 +35,10 @@ const mutations = {
 
     [ADMIN_PRODUCT_DELETE](state, { id }) {
         return state.products = state.products.filter((p) => p.id !== id)
+    },
+
+    [ADMIN_PRODUCT_SET_FILTER](state, { value }) {
+        return state.valueFilter = value
     },
 }
 
@@ -112,7 +118,11 @@ const actions = {
         }
 
         return vue.$toaster.error(Helper.getFirstError(response, vue.$i18n.t('textDefaultErrorRequest')));
-    }
+    },
+
+    actionProductSetFilter({ commit }, { value }) {
+        return commit(ADMIN_PRODUCT_SET_FILTER, { value })
+    },
 }
 
 const storeAdminProduct = {
