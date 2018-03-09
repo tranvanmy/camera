@@ -1,7 +1,7 @@
 <template>
     <b-nav-item-dropdown right no-caret>
         <template slot="button-content">
-            <img src="static/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            <img src="/static/img/avatars/6.jpg" class="img-avatar" :alt="$t('textAccount')">
         </template>
         <b-dropdown-header tag="div" class="text-center"><strong>{{ $t('textAccount') }}</strong></b-dropdown-header>
         <b-dropdown-item @click="logout">
@@ -11,8 +11,8 @@
     </b-nav-item-dropdown>
 </template>
 <script>
-import { STORAGE_AUTH } from '../../store/auth'
-import { callApiLogout } from '../../api/auth'
+import { STORAGE_AUTH } from 'admin/modules/auth/store'
+import { callApiLogout } from 'admin/modules/auth/api'
 
 export default {
     name: 'header-dropdown',

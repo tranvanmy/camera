@@ -40,5 +40,5 @@ export default {
     @import '~bootstrap-vue/dist/bootstrap-vue.css';
 
     // Import Main styles for this application
-    @import './scss/style';
+    @import './library/scss/style';
 </style>

@@ -1,6 +1,6 @@
 import router from '../router/router'
 
-import { STORAGE_AUTH, PERMISSION_ADMIN } from '../store/auth'
+import { STORAGE_AUTH, PERMISSION_ADMIN } from '../modules/auth/store/'
 
 let defaultAuth = JSON.stringify({ user: {}, token: {} })
 let auth = JSON.parse(localStorage.getItem(STORAGE_AUTH) || defaultAuth);
