@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import storeAuth from './auth'
-import storeAdminMenu from './menus'
-import storeLoading from './loading'
-import storeAdminCategory from './category'
-import storeAdminProduct from './product'
-import storeAdminPost from './post'
-import storeAdminBanner from './banner'
+import storeAuth from 'admin/modules/auth/store'
+import storeAdminMenu from 'admin/modules/menu/store'
+import storeLoading from 'admin/modules/loading/store'
+import storeAdminCategory from 'admin/modules/category/store'
+import storeAdminProduct from 'admin/modules/product/store'
+import storeAdminPost from 'admin/modules/post/store'
+import storeAdminBanner from 'admin/modules/banner/store'
 
 Vue.use(Vuex)
 

@@ -1,22 +1,25 @@
 import VueRouter from 'vue-router'
-import { STORAGE_AUTH } from '../store/auth'
-import Login from '../views/auth/Login.vue'
+
+import { STORAGE_AUTH } from '../modules/auth/store/'
 import Admin from '../components/Admin.vue'
-import Dashboard from '../views/dashboard/Dashboard.vue'
-import AdminMenu from '../views/menu/AdminMenu.vue'
-import AdminCategory from '../views/category/AdminCategory.vue'
 
-import AdminProduct from '../views/product/AdminProduct.vue'
-import AdminProductAdd from '../views/product/AdminProductAdd.vue'
-import AdminProductEdit from '../views/product/AdminProductEdit.vue'
+import Login from '../modules/auth/views/Login.vue'
+import Dashboard from '../modules/dashboard/views/Dashboard.vue'
 
-import AdminPost from '../views/post/AdminPost.vue'
-import AdminPostAdd from '../views/post/AdminPostAdd.vue'
-import AdminPostEdit from '../views/post/AdminPostEdit.vue'
+import AdminMenu from '../modules/menu/views/AdminMenu.vue'
+import AdminCategory from '../modules/category/views/AdminCategory.vue'
 
-import AdminBanner from '../views/banner/AdminBanner.vue'
+import AdminProduct from '../modules/product/views/AdminProduct.vue'
+import AdminProductAdd from '../modules/product/views/AdminProductAdd.vue'
+import AdminProductEdit from '../modules/product/views/AdminProductEdit.vue'
 
-import AdminSetup from '../views/setup/AdminSetup.vue'
+import AdminPost from '../modules/post/views/AdminPost.vue'
+import AdminPostAdd from '../modules/post/views/AdminPostAdd.vue'
+import AdminPostEdit from '../modules/post/views/AdminPostEdit.vue'
+
+import AdminBanner from '../modules/banner/views/AdminBanner.vue'
+
+import AdminSetup from '../modules/setup/views/AdminSetup.vue'
 
 const router =  new VueRouter({
     routes: [
@@ -45,7 +48,6 @@ const router =  new VueRouter({
                 {
                     name: 'Sản phẩm',
                     path: '/',
-                    redirect: 'products',
                     component: {
                         render(c) { 
                             return c('router-view')
@@ -72,7 +74,6 @@ const router =  new VueRouter({
                 {
                     name: 'Bài viết',
                     path: '/',
-                    redirect: 'posts',
                     component: {
                         render(c) { 
                             return c('router-view')
@@ -113,10 +114,6 @@ const router =  new VueRouter({
             name: 'Đăng nhập',
             component: Login
         }
-        // {
-        //     path: '/*',
-        //     redirect: '/dashboard'
-        // },
     ]
 
 });
