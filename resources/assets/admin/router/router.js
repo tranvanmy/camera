@@ -31,23 +31,23 @@ const router =  new VueRouter({
             meta: { requiresAuth: true },
             children: [
                 {
-                    path: 'dashboard',
+                    path: '/dashboard',
                     name: 'Quản lý',
                     component: Dashboard
                 },
                 {
-                    path: 'menus',
+                    path: '/menus',
                     name: 'Menus',
                     component: AdminMenu
                 },
                 {
-                    path: 'categories',
+                    path: '/categories',
                     name: 'Danh mục',
                     component: AdminCategory
                 },
                 {
                     name: 'Sản phẩm',
-                    path: '/',
+                    path: '/products',
                     component: {
                         render(c) { 
                             return c('router-view')
@@ -55,17 +55,17 @@ const router =  new VueRouter({
                     },
                     children: [
                         {
-                            path: 'products',
+                            path: '/',
                             name: 'Danh sách sản phẩm',
                             component: AdminProduct
                         },
                         {
-                            path: 'products/add',
+                            path: '/add',
                             name: 'Thêm mới sản phẩm',
                             component: AdminProductAdd
                         },
                         {
-                            path: 'products/edit/:id',
+                            path: '/edit/:id',
                             name: 'Cập nhật sản phẩm',
                             component: AdminProductEdit
                         }
@@ -73,7 +73,7 @@ const router =  new VueRouter({
                 },
                 {
                     name: 'Bài viết',
-                    path: '/',
+                    path: '/posts',
                     component: {
                         render(c) { 
                             return c('router-view')
@@ -81,17 +81,17 @@ const router =  new VueRouter({
                     },
                     children: [
                         {
-                            path: 'posts',
+                            path: '/',
                             name: 'Danh sách bài viết',
                             component: AdminPost
                         },
                         {
-                            path: 'posts/add',
+                            path: '/add',
                             name: 'Thêm mới bài viết',
                             component: AdminPostAdd
                         },
                         {
-                            path: 'posts/edit/:id',
+                            path: '/edit/:id',
                             name: 'Cập nhật bài viết',
                             component: AdminPostEdit
                         }
@@ -113,6 +113,10 @@ const router =  new VueRouter({
             path: '/login',
             name: 'Đăng nhập',
             component: Login
+        },
+        {
+            path: '*',
+            redirect: '/dashboard'
         }
     ]
 
