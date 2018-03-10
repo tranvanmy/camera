@@ -114,10 +114,10 @@ const router =  new VueRouter({
             name: 'Đăng nhập',
             component: Login
         },
-        {
-            path: '*',
-            redirect: '/dashboard'
-        }
+        // {
+        //     path: '*',
+        //     redirect: '/dashboard'
+        // }
     ]
 
 });
